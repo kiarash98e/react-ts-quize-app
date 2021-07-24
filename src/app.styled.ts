@@ -5,7 +5,7 @@ import BGImage from './images/nattu-adnan-unsplash.jpg'
 export const GlobalStyle = createGlobalStyle`
 html{
     height:100%;
-
+    width:100%;
 }
 body{
     background-image: url(${BGImage});
@@ -14,6 +14,8 @@ body{
     padding: 0 20px;
     display:flex;
     justify-content:center;
+    width:100%;
+    height:100%;
 }
 *{
     box-sizing:border-box;

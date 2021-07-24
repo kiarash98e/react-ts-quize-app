@@ -1,3 +1,3 @@
 export const shufleArray =(array:any[]) => {
-    [...array].sort(()=> Math.random() - .5)
+    return [...array].sort(()=> Math.random() - 0.5)
 }

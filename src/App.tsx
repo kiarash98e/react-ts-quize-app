@@ -4,10 +4,10 @@ import {fetchQuizQuestions,Difficulty,QuestionState} from './Api'
 import {GlobalStyle,Warraper} from './app.styled'
 
 export type AnswerObj = {
-  qeustion:string
+  qeustion?:string
   answer:string
   correct:boolean
-  correctAnswer:string
+  correctAnswer?:string
 }
 const Total_Question:number = 10
 const App: React.FC = () => {
@@ -21,7 +21,6 @@ const App: React.FC = () => {
   const [score,setScore] = React.useState<number>(0)
   const [gameOver,setGameOver] = React.useState<boolean>(true)
 
-  console.log(fetchQuizQuestions)
   const startApi = async () => {
     setLoading(true)
     setGameOver(false)
@@ -49,7 +48,7 @@ const App: React.FC = () => {
         correct,
         correct_answer:questions[number].correct_answer,
       }
-      setUserAnswers((prev) => [...prev, answerObject])
+      setUserAnswers([...userAnswers,answerObject])
     }
   }
   
@@ -67,6 +66,7 @@ const App: React.FC = () => {
   <GlobalStyle/>
     <Warraper>
       <div className="">
+        {console.log(questions[number])}
         <h1>React Quize</h1>
         {
           gameOver || userAnswers.length === Total_Question ?
@@ -76,7 +76,7 @@ const App: React.FC = () => {
         }
         {
           !gameOver ? 
-          <p className="score">score:{score}</p>:null
+          <p className="score">score : {score}</p>:null
         }
         {
           loading ? 
@@ -89,15 +89,15 @@ const App: React.FC = () => {
             totalQuestion={Total_Question}
             question={questions[number].question}
             answers={questions[number].answers}
-            userAnswer={userAnswers ? userAnswers[number]:undefined}
+            userAnswer={userAnswers[number] ? userAnswers[number] : undefined}
             callback={checkAnswer}
           />
         }
         {
           !loading && 
           !gameOver && 
-          userAnswers.length === number +1 &&
-          number !== Total_Question -1 ?
+          userAnswers.length === number + 1 &&
+          number !== Total_Question - 1 ?
           <button className="next" onClick={nextQuestion}>Next</button>
           :null
         }
